@@ -8,7 +8,7 @@ public class RaceSystem : MonoBehaviour
 
     public Text timeText;
 
-    private int count;
+    public int count;
     private bool congoal, goalnow = false, StartGoalLine = false;
     private float seconds, minutes;
 
@@ -26,7 +26,7 @@ public class RaceSystem : MonoBehaviour
         }
         if (other.gameObject.tag == "Line")
         {
-            if (count == 6)
+            if (count == 12)
             {
                 Debug.Log("GOAL!");
                 StartGoalLine = false;
