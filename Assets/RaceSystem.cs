@@ -10,7 +10,18 @@ public class RaceSystem : MonoBehaviour
 
     public int count;
     private bool congoal, goalnow = false, StartGoalLine = false;
+    private float time;
     private float seconds, minutes;
+    private GameObject[] checkPoint;
+    public int countRound = 0;
+    public float[] roundTimes;
+    public GameObject goalpanel;
+
+    private void Start()
+    {
+        checkPoint = GameObject.FindGameObjectsWithTag("CheckPoint");
+        goalpanel.SetActive(false);
+    }
 
     void Update()
     {
@@ -21,20 +32,22 @@ public class RaceSystem : MonoBehaviour
     {
         if (other.gameObject.tag == "CheckPoint")
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             count += 1;
         }
         if (other.gameObject.tag == "Line")
         {
-            if (count == 12)
+            StartGoalLine = true;
+            if (count == 7)
             {
                 Debug.Log("GOAL!");
-                StartGoalLine = false;
+
+                foreach (GameObject point in checkPoint)
+                {
+                    point.SetActive(true);
+                }
                 goalnow = true;
-            }
-            else
-            {
-                StartGoalLine = true;
             }
         }
     }
@@ -43,24 +56,30 @@ public class RaceSystem : MonoBehaviour
     {
         if (StartGoalLine)
         {
-            seconds += Time.deltaTime;
+            time += Time.deltaTime;
+            minutes = time / 60f;
+            seconds = time % 60f;
         }
 
-        if (seconds >= 60)
-        {
-            minutes++;
-            seconds -= 60;
-        }
 
         if (!goalnow)
         {
 
-            timeText.text = "Time" + minutes.ToString("00") + ":" + ((int)seconds).ToString("00");
+            timeText.text = "Time" + ((int)minutes).ToString("00") + ":" + ((int)seconds).ToString("00");
         }
         else
         {
 
-            timeText.text = "ÉSÅ[ÉãÉ^ÉCÉÄÇÕ  " + minutes.ToString("00") +":"+((int)seconds).ToString("00");
+            roundTimes[countRound] = time;
+            countRound++;
+            time = 0;
+            count = 0;
+            goalnow = false;
+            if (countRound == roundTimes.Length)
+            {
+                StartGoalLine = false;
+                goalpanel.SetActive(true);
+            }
         }
     }
 }
