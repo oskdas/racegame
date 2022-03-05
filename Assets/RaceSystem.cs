@@ -16,6 +16,8 @@ public class RaceSystem : MonoBehaviour
     public int countRound = 0;
     public float[] roundTimes;
     public GameObject goalpanel;
+    public float best=Mathf.Infinity;
+    public Text bt;
 
     private void Start()
     {
@@ -71,6 +73,10 @@ public class RaceSystem : MonoBehaviour
         {
 
             roundTimes[countRound] = time;
+            if (time < best)
+            {
+                best = time;
+            }
             countRound++;
             time = 0;
             count = 0;
@@ -79,6 +85,9 @@ public class RaceSystem : MonoBehaviour
             {
                 StartGoalLine = false;
                 goalpanel.SetActive(true);
+                minutes = best / 60f;
+                seconds = best % 60f;
+                bt.text= ((int)minutes).ToString("00") + ":" + ((int)seconds).ToString("00");
             }
         }
     }
