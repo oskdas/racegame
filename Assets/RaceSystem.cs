@@ -19,13 +19,14 @@ public class RaceSystem : MonoBehaviour
     public float best=Mathf.Infinity;
     public Text bt;
     public GameObject player;
-    Vector3 point;
+    Transform point;
+    public GameObject startposition;
 
     private void Start()
     {
         checkPoint = GameObject.FindGameObjectsWithTag("CheckPoint");
         goalpanel.SetActive(false);
-        point=new Vector3(142, 0, 550);
+        point = startposition.transform;
     }
 
     void Update()
@@ -41,7 +42,7 @@ public class RaceSystem : MonoBehaviour
             //Destroy(other.gameObject);
             other.gameObject.SetActive(false);
             count += 1;
-            point = other.gameObject.transform.position;
+            point = other.gameObject.transform;
         }
         if (other.gameObject.tag == "Line")
         {
@@ -59,8 +60,8 @@ public class RaceSystem : MonoBehaviour
         }
         if (other.gameObject.tag == "Bonnet")
         {
-            player.transform.position = point;
-            player.transform.localEulerAngles = new Vector3(0, 0, 0);
+            player.transform.position = point.position;
+            player.transform.localEulerAngles = point.localEulerAngles;
             player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
     }
