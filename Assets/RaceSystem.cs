@@ -21,6 +21,7 @@ public class RaceSystem : MonoBehaviour
     public GameObject player;
     Transform point;
     public GameObject startposition;
+    public LakituController lakitu;
 
     private void Start()
     {
@@ -60,9 +61,10 @@ public class RaceSystem : MonoBehaviour
         }
         if (other.gameObject.tag == "Bonnet")
         {
-            player.transform.position = point.position;
-            player.transform.localEulerAngles = point.localEulerAngles;
-            player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            lakitu.MovePosition();
+            //player.transform.position = point.position;
+           // player.transform.localEulerAngles = point.localEulerAngles;
+            //player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
     }
 
