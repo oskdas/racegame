@@ -63,8 +63,10 @@ public class RaceSystem : MonoBehaviour
         {
             lakitu.MovePosition();
             //player.transform.position = point.position;
-           // player.transform.localEulerAngles = point.localEulerAngles;
-            //player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            player.transform.localEulerAngles = point.localEulerAngles;
+            player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            player.GetComponent<Rigidbody>().useGravity = false;
+            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
