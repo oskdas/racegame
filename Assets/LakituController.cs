@@ -6,11 +6,12 @@ public class LakituController : MonoBehaviour
 {
     public GameObject player;
     Vector3 targetPosition;
-    bool isMove=false;
+    bool isMove = false;
+    public Transform point;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -18,7 +19,21 @@ public class LakituController : MonoBehaviour
     {
         if (isMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime*100);
+
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 100);
+            if (transform.position.y > 19)
+            {
+                //isMove = false;
+                targetPosition = point.position;
+                targetPosition.y = 20;
+                if (transform.position.x == targetPosition.x && transform.position.z == targetPosition.z)
+                {
+
+                    player.transform.parent = null;
+                    isMove = false;
+                }
+            }
+
         }
     }
     public void MovePosition()

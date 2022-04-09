@@ -67,6 +67,7 @@ public class RaceSystem : MonoBehaviour
             player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             player.GetComponent<Rigidbody>().useGravity = false;
             player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            lakitu.point = point;
         }
     }
 
