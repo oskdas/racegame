@@ -31,6 +31,8 @@ public class LakituController : MonoBehaviour
 
                     player.transform.parent = null;
                     isMove = false;
+                    player.GetComponent<Rigidbody>().useGravity = true;
+                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
             }
 
